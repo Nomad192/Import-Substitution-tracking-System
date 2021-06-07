@@ -17,30 +17,33 @@ class Tree implements Serializable {
   		return rootNode;
   	}
 
-   	public void iniRoot(String name) {
+   	public void iniRoot(String name_site, String name_user) {
    		Node newNode = new Node();
-       	newNode.setName(name);
+       	newNode.setNameSite(name_site);
+        newNode.setNameUser(name_user);
         rootNode = newNode;
-    	names.put(name, rootNode);
+    	names.put(name_site, rootNode);
    	}
 
-   	public void insert(String name, String root) {
-   		if (names.get(name) != null) {
+   	public void insert(String name_site, String name_user, String root) {
+   		if (names.get(name_site) != null) {
    			System.err.println("Error: name taken.");
    			return;
    		}
 
    		Node parent = names.get(root);
+
    		if (parent == null) {
    			System.err.println("Error: the parent does not exist.");
    			return;
    		}
 
    		Node child = new Node();
-   		child.setName(name);
+   		child.setNameSite(name_site);
+      child.setNameUser(name_user);
    		child.setParent(parent);
    		parent.addChild(child);
-   		names.put(name, child);
+   		names.put(name_site, child);
    	}
 
     public void del(String name) {
@@ -79,18 +82,18 @@ class Tree implements Serializable {
         	System.err.println("Error: there is no node with this name");
         	return "";
         }
-        String result = "{\"name\":\"" + node.getName() + "\",\"projects\":[";
+        String result = "{\"name_site\":\"" + node.getName() + "\",\"name\":\"" + node.getName() + "\",\"projects\":[";
         Project project;
         for (int i = 0; i < node.getLenProject(); i++) {
           project = node.getProject(i);
-          result += "{\"name\":\"" + project.name;
-          result += "\",\"descriprion\":\"" + project.descriptoin;
-          result += "\",\"stat\":\"" + project.status;
-          result += "\",\"cost\":\"" + project.cost;
-          result += "\",\"volume\":\"" + project.volume;
-          result += "\",\"part\":\"" + project.part;
-          result += "\",\"podr\":\"" + project.division;
-          result += "\",\"napr\":\"" + project.direction;
+          result += "{\"name\":\"" + project.getName();
+          result += "\",\"descriprion\":\"" + project.getDescriptoin();
+          result += "\",\"stat\":\"" + project.getStatus();
+          result += "\",\"cost\":\"" + project.getCost();
+          result += "\",\"volume\":\"" + project.getVolume();
+          result += "\",\"part\":\"" + project.getPart();
+          result += "\",\"podr\":\"" + project.getDivision();
+          result += "\",\"napr\":\"" + project.getDirection();
           result += "\"}";
           if (i + 1 < node.getLenProject()) {
             result += ",";

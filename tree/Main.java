@@ -18,14 +18,14 @@ class Main {
        	}
        	catch(Exception ex){
             //System.out.println("Error: save file not found.");
-            tree.iniRoot("GasProm");
+            tree.iniRoot("Gazprom", "Газпром");
         }
 
 		if (args.length < 1) {
 			System.out.println("Error: command not found");
 		} else if (Integer.parseInt(args[0]) == 0) {
 
-			tree.insert(args[1], args[2]);
+			tree.insert(args[1], args[2], args[3]);
 			//tree.printTree();
 
 		} else if (Integer.parseInt(args[0]) == 1) {
@@ -48,7 +48,7 @@ class Main {
 
 		} else if (Integer.parseInt(args[0]) == 4) {
 
-			System.out.println(tree.getFullInf("GasProm"));
+			System.out.println(tree.getFullInf("Gazprom"));
 
 		} else if (Integer.parseInt(args[0]) == 5) {
 
