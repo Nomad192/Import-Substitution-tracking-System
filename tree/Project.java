@@ -3,6 +3,7 @@ package tree;
 import java.io.Serializable;
 
 class Project implements Serializable {
+  private String id;
   private String name;
   private String status;
   private String descriptoin;
@@ -12,8 +13,9 @@ class Project implements Serializable {
   private String division;
   private String direction;
 
-  public Project(String name, String status, String descriptoin, int cost, int volume, int part, String division, String direction) {
+  public Project(String name, String id, String status, String descriptoin, int cost, int volume, int part, String division, String direction) {
     this.name = name;
+    this.id = id;
     this.status = status;
     this.descriptoin = descriptoin;
     this.cost = cost;
@@ -23,8 +25,10 @@ class Project implements Serializable {
     this.direction = direction;
   }
 
-  public String getName()
-  {
+  public String getID() {
+    return id;
+  }
+  public String getName() {
     return name;
   }
   public String getStatus()

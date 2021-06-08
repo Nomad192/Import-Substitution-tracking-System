@@ -34,21 +34,28 @@ class Main {
 			tree.printTree();
 
 		} else if (Integer.parseInt(args[0]) == 2) {
-			Project newProject = new Project (args[2], args[3], args[4],
-				Integer.parseInt(args[5]),
+			Project newProject = new Project (args[2], args[3], args[4], args[5],
 				Integer.parseInt(args[6]),
-				Integer.parseInt(args[7]), args[8], args[9]);
+				Integer.parseInt(args[7]),
+				Integer.parseInt(args[8]), args[9], args[10]);
 
 			tree.addProject(args[1], newProject);
 			tree.printTree();
 
 		} else if (Integer.parseInt(args[0]) == 3) {
 
-			System.out.println(tree.getFullInf(args[1]));
+			if (args.length < 2)
+			{
+				System.out.print("error");
+			}
+			else
+			{
+				System.out.print(tree.getFullInf(args[1]));				
+			}
 
 		} else if (Integer.parseInt(args[0]) == 4) {
 
-			System.out.println(tree.getFullInf("Gazprom"));
+			System.out.print(tree.getFullInf("Gazprom"));
 
 		} else if (Integer.parseInt(args[0]) == 5) {
 

@@ -2,19 +2,20 @@ package tree;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 class Node implements Serializable {
   private Node parent;
-  private String name_site;
-  private String name_user;
+  private String id;
+  private String name;
   private ArrayList<Node> childs = new ArrayList<>(); 
   private int quantityChild = 0; 
   private ArrayList<Project> projects = new ArrayList<>(); 
 
   public void printNode(String tab) { 
-    System.out.print(name_site);
+    System.out.print(id);
     for(int i = 0; i < projects.size(); i++) {
-      System.out.print(" " + projects.get(i).getName());
+      System.out.print(" " + projects.get(i).getID());
     }
     System.out.println();
     tab += "  ";       	
@@ -25,24 +26,35 @@ class Node implements Serializable {
     }
   }
 
-  public String getNameSite() {
-    return name_site;
+  public boolean nameProjectTaken(final String name)
+  {
+    for(int i = 0; i < projects.size(); i++) {
+      if(projects.get(i).getID().equals(name))
+      {   
+        return true;
+      }
+    }    
+    return false;    
+  }
+
+  public String getID() {
+    return id;
   }
 
   public String getName() {
-    return name_user;
+    return name;
   }
 
   public void addChild(final Node newChild) {
     childs.add(newChild);
   }
 
-  public void setNameSite(final String name_site) {
-    this.name_site = name_site;
+  public void setNameSite(final String id) {
+    this.id = id;
   }
 
-  public void setNameUser(final String name_user) {
-    this.name_user = name_user;
+  public void setNameUser(final String name) {
+    this.name = name;
   }
 
   public Node getChild(final int iterator) {
