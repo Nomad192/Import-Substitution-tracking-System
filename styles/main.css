@@ -4,7 +4,6 @@ body, html
     height: 100%;
     margin: 0;
     padding: 0;
-    /*font-family: sans-serif;*/
 }
 
 .en .ru,
@@ -22,13 +21,6 @@ body, html
     display: flex;
     flex-direction: row; 
     justify-content: space-between;
-    /*padding: 5px 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;    
-    box-shadow: 0 0 5px #1d2225;*/
-    /*margin-bottom: 20px;
-    box-shadow: 0 6px 4px -4px rgba(0, 0, 0, .2);*/
 }
 
 .header-buttons
@@ -41,8 +33,6 @@ body, html
 
 .button
 {
-   /* width: 60px;*/
-    /*padding: 5px 10px;*/
     cursor: pointer;
     outline: none;
     border: none;
@@ -63,31 +53,7 @@ body, html
     flex: 1 3 60px;
 }
 
-/*.map-button
-{
-    position: relative;
-    left: 20px;
-    display: inline-block;
-    padding: 5px 10px;
-    cursor: pointer;
-    outline: none;
-    border: none;
-}
-
-.theme-button
-{
-    position: absolute;
-    right: 20px;
-    top: 0px;
-    display: inline-block;
-    padding: 5px 10px;
-    cursor: pointer;
-    outline: none;
-    border: none;
-}*/
-
 .content {
-    /*width: 55%;*/
     text-align:  center;
     padding: 10px 10px;
     display: flex;
@@ -96,7 +62,6 @@ body, html
 }
 
 .content-main {
-    /*box-shadow: 0 0 3px silver;*/
     flex: 3 1 180px;
 }
 
@@ -105,7 +70,7 @@ body, html
     display: none;
 }
 
-.content-map {
+.content-path {
     box-shadow: 0 0 3px silver;
     flex: 1 3 60px;
 }
@@ -139,42 +104,34 @@ body, html
     text-decoration: underline;
 }
 
-    .preloader {
-      position: fixed;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-      /*background: #fff;*/
-      z-index: 1001;
-    }
+.preloader 
+{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1001;
+}
 
-    .preloader__image {
+.preloader__image 
+{     
+  position: relative;
+  top: 46px;
+  left: 0px;
+  width: 512px;
+  height: 512px;
+  background: url('/images/favicon.gif') no-repeat 50% 50%;
+}
 
-      /*
-      position: relative;
-      top: 94px;
-      left: 74px;
-      width: 128px;
-      height: 64px;
-      margin-top: -64px;
-      margin-left: -64px;      
-      */      
-      position: relative;
-      top: 46px;
-      left: 0px;
-      width: 512px;
-      height: 512px;
-      background: url('/images/favicon.gif') no-repeat 50% 50%;
-      /*расположение (url) изображения gif и др. параметры*/
-    }
+.loaded_hiding .preloader 
+{
+  transition: 0.1s opacity;
+  opacity: 0;
+}
 
-    .loaded_hiding .preloader {
-      transition: 0.1s opacity;
-      opacity: 0;
-    }
-
-    .loaded .preloader {
-      display: none;
-    }
+.loaded .preloader 
+{
+  display: none;
+}

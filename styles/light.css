@@ -43,17 +43,3 @@ body
 {
     color: #cc0000;
 }
-
-#left {
-  box-shadow: 0 0 5px #202020; 
-}
-#right {
-  box-shadow: 0 0 5px #202020;
-}
-#center {
-  box-shadow: 0 0 5px #202020;
-}
-
-/*.content {
-    box-shadow: 0 0 30px silver;
-}*/

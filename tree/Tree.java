@@ -88,13 +88,47 @@ class Tree implements Serializable {
 
   	if (node == null)
     {
-      //System.err.println("Error: there is no node with this name");
-      return "error";
+      return "Error: the company with the name \"" + name + "\" was not found!";
     }
 
-    String result = "{\"id\":\"" + node.getID() + "\",\"name\":\"" + node.getName() + "\",\"projects\":[";
-    Project project;
+    String result = "{";
+    result += "\"id\":\"" + node.getID() + "\"";
+    result += ",\"name\":\"" + node.getName() + "\"";
 
+
+
+    result += ",\"path\":[";
+    Node path = node;
+    while (!path.getID().equals("Gazprom"))
+    {
+      result += "{\"id\":\"" + path.getID();
+      result += "\",\"name\":\"" + path.getName();
+      result += "\"}";
+      result += ",";
+      path = path.getParent();        
+    }
+    result += "{\"id\":\"" + path.getID();
+    result += "\",\"name\":\"" + path.getName();
+    result += "\"}";
+    result += "]";
+
+
+    result += ",\"daughters\":[";
+    Node dot;
+    for (int i = 0; i < node.getLenChilds(); i++) {
+      dot = node.getChild(i);
+      result += "{\"id\":\"" + dot.getID();
+      result += "\",\"name\":\"" + dot.getName();
+      result += "\",\"pr1\":\"p1\",\"pr2\":\"p2\"}";
+      if (i + 1 < node.getLenChilds()) {
+        result += ",";
+      }
+    }
+    result += "]";
+
+
+    result += ",\"projects\":[";
+    Project project;
     for (int i = 0; i < node.getLenProject(); i++) {
       project = node.getProject(i);
       result += "{\"id\":\"" + project.getID();
@@ -111,21 +145,10 @@ class Tree implements Serializable {
         result += ",";
       }
     }
+    result += "]";
 
-    result += "],\"daughters\":[";
-    Node dot;
 
-    for (int i = 0; i < node.getLenChilds(); i++) {
-      dot = node.getChild(i);
-      result += "{\"id\":\"" + dot.getID();
-      result += "\",\"name\":\"" + dot.getName();
-      result += "\",\"pr1\":\"p1\",\"pr2\":\"p2\"}";
-      if (i + 1 < node.getLenChilds()) {
-        result += ",";
-      }
-    }
-
-    result += "]}";
+    result += "}";
     return result;
   }
 

@@ -8,7 +8,7 @@ let path = window.location.pathname;
 let page = path.split("/").pop().replace("%20", " ");
 console.log("request \"\"" + page + "\"\"");
 
-request.open("GET", "name-form.php?name=\"" + page + "\"");   
+request.open("GET", "name-form.php?name=\"" + page + "\""); 
 
 request.send();    
 
@@ -21,25 +21,30 @@ request.onload = function()
     else 
     { 
         console.log("response \"" + request.response + "\"");
-        if (request.response == "")
+
+        let response_information;
+        try 
         {
-            upload_the_error_name("Companies with the name \"" + page + "\" not found in the database");
+            response_information = JSON.parse(request.response);
         }
-        else
+        catch (err) 
         {
-            let response_information;
-            try 
-            {
-                response_information = JSON.parse(request.response);
-                upload_the_main_name(response_information["name"]);   
-                upload_array(response_information["daughters"], "daughters", "name", "pr1", "pr2");
-                upload_array(response_information["projects"], "projects", "stat", "name", "volume"); 
-            } 
-            catch (err) 
-            {
-                upload_the_error_name(err);
-            }
+            console.log(request.response);
+            upload_the_error_name("Database error");
         }
+        try
+        {
+            upload_the_main_name(response_information["name"]);   
+            upload_array(response_information["daughters"], "daughters", upload_daughter);
+            upload_array(response_information["projects"], "projects", upload_project);
+            upload_path(response_information["path"], "path", upload_path); 
+        } 
+        catch (err) 
+        {
+            console.log(request.response);
+            upload_the_error_name("|Parse error: " + err);
+        }
+        
         document.body.classList.add('loaded_hiding');
         window.setTimeout(function () {
         document.body.classList.add('loaded');
@@ -92,147 +97,93 @@ function upload_the_main_name (name_str) {
         name_class.removeChild(name_class.firstChild);
     }
     name_class.appendChild(name);
-    //document.getElementById('content-map').classList.toggle("none");
-    //document.getElementById('projects').classList.toggle("none");
-    //document.getElementById('daughters').classList.toggle("none");    
 }
 
-function upload_array (array, id, inf_one, inf_two, inf_three)
+function upload_array (array, id, func)
 {
-    document.getElementById(id).classList.toggle("none"); 
-
-    for (let i = 0; i < array.length; i++) 
+    let i = 0;
+    for (; i < array.length; i++) 
     {
-        upload_element(array[i], id, inf_one, inf_two, inf_three);
+        func(array[i]);
+    }
+    if (i > 0)
+    {
+        document.getElementById(id).classList.toggle("none");         
     }
 }
 
-function upload_element (element, id, inf_one, inf_two, inf_three)
+function upload_path (array, id, func)
+{
+    document.getElementById(id).classList.toggle("none"); 
+
+    let name_class = document.getElementById("path");
+
+    for (let i = array.length-1; i > 0; i--) 
+    {
+        name_class.appendChild(document.createElement("BR"));
+
+        let name_link = document.createElement("a");
+        name_link.appendChild(document.createTextNode(array[i]["name"]));
+        name_link.href = '/' + array[i]["id"]; 
+        name_link.className = "links name-color";    
+        name_class.appendChild(name_link);
+
+        name_class.appendChild(document.createElement("BR")); 
+        name_class.appendChild(document.createTextNode("↓"));         
+    }
+
+    name_class.appendChild(document.createElement("BR"));
+
+    let name_link = document.createElement("a");
+    name_link.appendChild(document.createTextNode(array[0]["name"]));
+    name_link.href = '/' + array[0]["id"]; 
+    name_link.className = "links name-color";    
+    name_class.appendChild(name_link);
+
+    name_class.appendChild(document.createElement("BR"));  
+}
+
+function upload_daughter (element)
 {
     let row = document.createElement("TR");
 
     let name = document.createElement("TD");
-    /*name.appendChild(document.createTextNode(element[inf_one]));
-    name.className = "links name-color"; */
 
     let name_link = document.createElement("a");
-    name_link.appendChild(document.createTextNode(element[inf_one]));
-    name_link.href = '/' + element[inf_one]; 
+    name_link.appendChild(document.createTextNode(element["name"]));
+    name_link.href = '/' + element["id"]; 
     name_link.className = "links name-color";    
     name.appendChild(name_link);
     row.appendChild(name); 
        
-    var td2 = document.createElement("TD");
-    td2.appendChild (document.createTextNode(element[inf_two]));
+    let td2 = document.createElement("TD");
+    td2.appendChild (document.createTextNode(element["pr1"]));
     row.appendChild(td2);    
 
-    var td3 = document.createElement("TD");
-    td3.appendChild (document.createTextNode(element[inf_three]));
+    let td3 = document.createElement("TD");
+    td3.appendChild (document.createTextNode(element["pr2"]));
     row.appendChild(td3);
 
-    let name_class = document.getElementById(id);
+    let name_class = document.getElementById("daughters");
     name_class.appendChild(row);    
 }
 
-// id того места, где форма
-
-/*function redirect(text)
+function upload_project (element)
 {
-    alert(text);
+    let row = document.createElement("TR");
+
+    let status = document.createElement("TD"); 
+    status.appendChild(document.createTextNode(element["stat"]));
+    row.appendChild(status); 
+       
+    let name = document.createElement("TD");
+    name.appendChild (document.createTextNode(element["name"]));
+    row.appendChild(name);    
+
+    let volume = document.createElement("TD");
+    volume.appendChild (document.createTextNode(element["volume"]));
+    row.appendChild(volume);
+
+    let name_class = document.getElementById("projects");
+    name_class.appendChild(row);   
 }
-
-function up(name) {
-  // var servResponse = document.querySelector('#response')
-
-  // название формы (ourForm)
-      // var name = document.forms.ourForm.ourForm_inp.value;
-      // name = encodeURIComponent(name)
-      var xhr = new XMLHttpRequest()
-      // пост - текстовый запрос, релизовывать на пыхе
-      xhr.open('GET', 'form.php')
-      // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-      xhr.onreadystatechange = function (){
-          if (xhr.readyState === 4 && xhr.status ===    200) {
-            //ответ
-              //// console.log(xhr.response);
-                            //console.log('resp');
-            console.log('cccc' + xhr.responseText);
-            redirect(xhr.responseText);
-            return;
-            // servResponse.textContent = xhr.responseText;
-          }
-      }
-      xhr.send();
-}
-
-
-
-
-up();
-
-
-
-function populateHeader(jsonObj) {
-  var myH1 = document.createElement('h1');
-  myH1.textContent = jsonObj['squadName'];
-  header.appendChild(myH1);
-
-  var myPara = document.createElement('p');
-  myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
-  header.appendChild(myPara);
-}
-
-function showHeroes(jsonObj) {
-  var heroes = jsonObj['members'];
-
-  for (var i = 0; i < heroes.length; i++) {
-    var myArticle = document.createElement('article');
-    var myH2 = document.createElement('h2');
-    var myPara1 = document.createElement('p');
-    var myPara2 = document.createElement('p');
-    var myPara3 = document.createElement('p');
-    var myList = document.createElement('ul');
-
-    myH2.textContent = heroes[i].name;
-    myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
-    myPara2.textContent = 'Age: ' + heroes[i].age;
-    myPara3.textContent = 'Superpowers:';
-
-    var superPowers = heroes[i].powers;
-    for (var j = 0; j < superPowers.length; j++) {
-      var listItem = document.createElement('li');
-      listItem.textContent = superPowers[j];
-      myList.appendChild(listItem);
-    }
-
-    myArticle.appendChild(myH2);
-    myArticle.appendChild(myPara1);
-    myArticle.appendChild(myPara2);
-    myArticle.appendChild(myPara3);
-    myArticle.appendChild(myList);
-
-    section.appendChild(myArticle);
-  }
-}*/
-
-
-/*
-
-addRow("daughters", "1");
-addRow("daughters", "2");
-
-function addRow (id, num)
-{
-    var tbody = document.getElementById(id);
-    var row = document.createElement("TR")
-    var td1 = document.createElement("TD")
-    td1.appendChild(document.createTextNode(num))
-    var td2 = document.createElement("TD")
-    td2.appendChild (document.createTextNode("column 2"))
-    var td3 = document.createElement("TD")
-    td3.appendChild (document.createTextNode("column 3"))
-    row.appendChild(td1);
-    row.appendChild(td2);
-    row.appendChild(td3);
-    tbody.appendChild(row);
-}*/

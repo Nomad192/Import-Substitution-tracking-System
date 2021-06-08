@@ -43,17 +43,3 @@ body.dark .error
 {
     color: #b00103;
 }
-
-body.dark #left {
-  box-shadow: 0 0 5px #007ac2; 
-}
-body.dark #right {
-  box-shadow: 0 0 5px #007ac2;
-}
-body.dark #center {
-  box-shadow: 0 0 5px #007ac2;
-}
-
-/*body.dark .content {
-    box-shadow: 0 0 5px #007ac2;
-}*/
