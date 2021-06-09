@@ -1,7 +1,7 @@
 body.dark
 {
     background: #202020;
-    color: #e5e5e5;
+    color: #d6d6d7;
 }
 
 body.dark .header
@@ -36,10 +36,27 @@ body.dark .name-color
 
 body .dark .warning
 {
-    color: #e5e5e5;
+    color: #d6d6d7;
+    /*color: #e5e5e5;*/
 }
 
 body.dark .error
 {
     color: #b00103;
+}
+
+body.dark .table-button
+{
+    background: #202020;
+    color: #d6d6d7;
+}
+
+body.dark .table-button:hover
+{
+    background: #373737;
+}
+
+body.dark .table-button:active
+{
+    background: #838383;
 }

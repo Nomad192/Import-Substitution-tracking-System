@@ -43,3 +43,19 @@ body
 {
     color: #cc0000;
 }
+
+.table-button
+{
+    background: #e5e5e5;
+    color: #202020;
+}
+
+.table-button:hover
+{
+    background: #d9ebf9;
+}
+
+.table-button:active
+{
+    background: #bcdcf4;
+}

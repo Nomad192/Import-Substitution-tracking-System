@@ -12,6 +12,8 @@ request.open("GET", "name-form.php?name=\"" + page + "\"");
 
 request.send();    
 
+let response_information;
+
 request.onload = function() 
 {
     if (request.status != 200) 
@@ -22,28 +24,30 @@ request.onload = function()
     { 
         console.log("response \"" + request.response + "\"");
 
-        let response_information;
         try 
         {
             response_information = JSON.parse(request.response);
+            try
+            {
+                upload_the_main_name(response_information["name"]);   
+                //array_sort(response_information["projects"]);
+                //array_sort(response_information["daughters"]);
+                upload_array(response_information["daughters"], "daughters", upload_daughter);
+                upload_array(response_information["projects"], "projects", upload_project);
+                upload_path(response_information["path"], "path", upload_path); 
+            } 
+            catch (err) 
+            {
+                console.log(request.response);
+                upload_the_error_name("|Parse error: " + err);
+            }            
         }
         catch (err) 
         {
             console.log(request.response);
             upload_the_error_name("Database error");
         }
-        try
-        {
-            upload_the_main_name(response_information["name"]);   
-            upload_array(response_information["daughters"], "daughters", upload_daughter);
-            upload_array(response_information["projects"], "projects", upload_project);
-            upload_path(response_information["path"], "path", upload_path); 
-        } 
-        catch (err) 
-        {
-            console.log(request.response);
-            upload_the_error_name("|Parse error: " + err);
-        }
+
         
         document.body.classList.add('loaded_hiding');
         window.setTimeout(function () {
@@ -100,7 +104,7 @@ function upload_the_main_name (name_str) {
 }
 
 function upload_array (array, id, func)
-{
+{      
     let i = 0;
     for (; i < array.length; i++) 
     {
@@ -108,7 +112,7 @@ function upload_array (array, id, func)
     }
     if (i > 0)
     {
-        document.getElementById(id).classList.toggle("none");         
+        document.getElementById(id).classList.toggle("none");
     }
 }
 
@@ -186,4 +190,50 @@ function upload_project (element)
 
     let name_class = document.getElementById("projects");
     name_class.appendChild(row);   
+}
+
+sortButtonDaughters.onclick = () => 
+{
+    let key = document.getElementById("sortButtonDaughters").value;
+    sort_button("daughters", key);
+    reupload_array(response_information["daughters"], "daughters", upload_daughter);
+}
+
+sortButtonProjects.onclick = () => 
+{
+    let key = document.getElementById("sortButtonProjects").value;
+    sort_button("projects", key);
+    reupload_array(response_information["projects"], "projects", upload_project);
+}
+
+function sort_button (id, key)
+{
+    let invert = (document.getElementById(id).className.indexOf("invert") != -1) ? -1 : 1;
+    document.getElementById(id).classList.toggle("invert");
+
+    let array = response_information[id];
+
+    array.sort(function(obj1, obj2) {
+            if (obj1[key].toLowerCase() > obj2[key].toLowerCase()) return invert;        
+            if (obj1[key].toLowerCase() < obj2[key].toLowerCase()) return -invert;
+            return 0;
+        });
+}
+
+function reupload_array (array, id, func)
+{      
+    remove_childs(id, array.length);    
+    let i = 0;
+    for (; i < array.length; i++) 
+    {
+        func(array[i]);
+    }
+}
+
+function remove_childs (id, k) {
+    let parent = document.getElementById(id);
+    for (; k > 0; k--) 
+    {
+        parent.removeChild(parent.lastChild);
+    }
 }
