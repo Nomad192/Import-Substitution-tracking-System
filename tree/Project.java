@@ -7,22 +7,20 @@ class Project implements Serializable {
   private String name;
   private String status;
   private String descriptoin;
-  private int cost;
-  private int volume;
-  private int part;
-  private String division;
-  private String direction;
+  private long cost;
+  private long cost_import;
+  private long volume;
+  private long volume_import;
 
-  public Project(String name, String id, String status, String descriptoin, int cost, int volume, int part, String division, String direction) {
-    this.name = name;
+  public Project(String id, String name, String status, String descriptoin, long cost, long cost_import, long volume, long volume_import) {
     this.id = id;
+    this.name = name;
     this.status = status;
     this.descriptoin = descriptoin;
     this.cost = cost;
+    this.cost_import = cost_import;
     this.volume = volume;
-    this.part = part;
-    this.division = division;
-    this.direction = direction;
+    this.volume_import = volume_import;
   }
 
   public String getID() {
@@ -39,24 +37,20 @@ class Project implements Serializable {
   {
     return descriptoin;
   }
-  public int getCost()
+  public long getCost()
   {
     return cost;
   }
-  public int getVolume()
+  public long getCostImport()
+  {
+    return cost_import;
+  }
+  public long getVolume()
   {
     return volume;
   }
-  public int getPart()
+  public long getVolumeImport()
   {
-    return part;
-  }
-  public String getDivision()
-  {
-    return division;
-  }
-  public String getDirection()
-  {
-    return direction;
+    return volume_import;
   }
 }

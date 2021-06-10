@@ -45,14 +45,14 @@ request.onload = function()
         catch (err) 
         {
             console.log(request.response);
-            upload_the_error_name("Database error");
+            upload_the_error_name("Database " + request.response);
         }
 
         
         document.body.classList.add('loaded_hiding');
         window.setTimeout(function () {
-        document.body.classList.add('loaded');
-        document.body.classList.remove('loaded_hiding');
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
         }, 500);
     }
 };
@@ -160,13 +160,15 @@ function upload_daughter (element)
     name.appendChild(name_link);
     row.appendChild(name); 
        
-    let td2 = document.createElement("TD");
-    td2.appendChild (document.createTextNode(element["pr1"]));
-    row.appendChild(td2);    
+    let volume_inv = document.createElement("TD");
+    let volume_inv_number = parseInt(element["volume"])/parseInt(element["volume_import"]);
+    volume_inv.appendChild (document.createTextNode(volume_inv_number + "%"));
+    row.appendChild(volume_inv);    
 
-    let td3 = document.createElement("TD");
-    td3.appendChild (document.createTextNode(element["pr2"]));
-    row.appendChild(td3);
+    let volume_soft = document.createElement("TD");
+    let volume_soft_number = parseInt(element["cost"])/parseInt(element["cost_import"]);
+    volume_soft.appendChild (document.createTextNode(volume_soft_number + "%"));
+    row.appendChild(volume_soft);
 
     let name_class = document.getElementById("daughters");
     name_class.appendChild(row);    
@@ -177,52 +179,84 @@ function upload_project (element)
     let row = document.createElement("TR");
 
     let status = document.createElement("TD"); 
-    status.appendChild(document.createTextNode(element["stat"]));
+    status.appendChild(document.createTextNode(element["status"]));
     row.appendChild(status); 
        
     let name = document.createElement("TD");
     name.appendChild (document.createTextNode(element["name"]));
     row.appendChild(name);    
 
-    let volume = document.createElement("TD");
-    volume.appendChild (document.createTextNode(element["volume"]));
-    row.appendChild(volume);
+    let cost = document.createElement("TD");
+    cost.appendChild (document.createTextNode(element["cost"]));
+    row.appendChild(cost);
 
     let name_class = document.getElementById("projects");
     name_class.appendChild(row);   
 }
 
-sortButtonDaughters.onclick = () => 
+sortButtonDaughtersName.onclick = () => 
 {
-    let key = document.getElementById("sortButtonDaughters").value;
-    sort_button("daughters", key);
-    reupload_array(response_information["daughters"], "daughters", upload_daughter);
+    return sortButtonProject("sortButtonDaughtersName", "daughters", upload_daughter);
 }
 
-sortButtonProjects.onclick = () => 
+sortButtonDaughtersVolume.onclick = () => 
 {
-    let key = document.getElementById("sortButtonProjects").value;
-    sort_button("projects", key);
-    reupload_array(response_information["projects"], "projects", upload_project);
+    return sortButtonProject("sortButtonDaughtersVolume", "daughters", upload_daughter);
 }
 
-function sort_button (id, key)
+sortButtonDaughtersCost.onclick = () => 
 {
-    let invert = (document.getElementById(id).className.indexOf("invert") != -1) ? -1 : 1;
-    document.getElementById(id).classList.toggle("invert");
+    return sortButtonProject("sortButtonDaughtersCost", "daughters", upload_daughter);
+}
 
-    let array = response_information[id];
+sortButtonProjectsStatus.onclick = () =>
+{
+    return sortButtonProject("sortButtonProjectsStatus", "projects", upload_project);
+}
 
+sortButtonProjectsName.onclick = () =>
+{
+    return sortButtonProject("sortButtonProjectsName", "projects", upload_project);
+}
+
+sortButtonProjectsCost.onclick = () =>
+{
+    return sortButtonProject("sortButtonProjectsCost", "projects", upload_project);
+}
+
+function sortButtonProject (id_button, id_array, func)
+{
+    let array = response_information[id_array];
+    let button = document.getElementById(id_button);
+    let key = button.value;
+    let invert = (button.className.indexOf("invert") != -1) ? 1 : -1;   
+     
+    sort(array, key, invert);
+
+    let parent = document.getElementById(id_array);
+    remove_childs(parent, array.length); 
+
+    reupload_array(array, func);  
+
+    button.classList.toggle("invert");    
+}
+
+function sort (array, key, invert)
+{
     array.sort(function(obj1, obj2) {
             if (obj1[key].toLowerCase() > obj2[key].toLowerCase()) return invert;        
             if (obj1[key].toLowerCase() < obj2[key].toLowerCase()) return -invert;
+            if (key != "name")
+            {
+                if (obj1["name"].toLowerCase() > obj2["name"].toLowerCase()) return 1;        
+                if (obj1["name"].toLowerCase() < obj2["name"].toLowerCase()) return -1;    
+            }
             return 0;
         });
 }
 
-function reupload_array (array, id, func)
+function reupload_array (array, func)
 {      
-    remove_childs(id, array.length);    
     let i = 0;
     for (; i < array.length; i++) 
     {
@@ -230,9 +264,8 @@ function reupload_array (array, id, func)
     }
 }
 
-function remove_childs (id, k) {
-    let parent = document.getElementById(id);
-    for (; k > 0; k--) 
+function remove_childs (parent, quantity) {
+    for (; quantity > 0; quantity--) 
     {
         parent.removeChild(parent.lastChild);
     }

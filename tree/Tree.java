@@ -18,14 +18,12 @@ class Tree implements Serializable {
 	}
 
  	public void iniRoot(String id, String name) {
- 		Node newNode = new Node();
-     	newNode.setNameSite(id);
-      newNode.setNameUser(name);
-      rootNode = newNode;
+ 		Node newNode = new Node(id, name, null, 0, 0, 0, 0);
+    rootNode = newNode;
   	names.put(id, rootNode);
  	}
 
- 	public void insert(String id, String name, String root) {
+ 	public void addChild(String id, String name, String root) {
  		if (names.get(id) != null) {
  			System.err.println("Error: name taken.");
  			return;
@@ -38,12 +36,10 @@ class Tree implements Serializable {
  			return;
  		}
 
- 		Node child = new Node();
- 		child.setNameSite(id);
-    child.setNameUser(name);
- 		child.setParent(parent);
- 		parent.addChild(child);
+ 		Node child = new Node(id, name, parent, 0, 0, 0, 0);
+    parent.addChild(child);
  		names.put(id, child);
+    System.err.println("success");
  	}
 
   public void del(String name) {
@@ -57,7 +53,7 @@ class Tree implements Serializable {
     if (delll == rootNode) {
       rootNode = null;
     } else {
-      (delll.getParent()).delChild(delll);
+      delll.getParent().delChild(delll);
       delll = null;
     }
     names.remove(name);
@@ -82,24 +78,26 @@ class Tree implements Serializable {
     return;
   }
 
-  public String getFullInf(String name) {
+  public String getFullInf(String id) {
 
-  	Node node = names.get(name);
+  	Node node = names.get(id);
 
   	if (node == null)
     {
-      return "Error: the company with the name \"" + name + "\" was not found!";
+      return "Error: the company with the name \"" + id + "\" was not found!";
     }
 
     String result = "{";
     result += "\"id\":\"" + node.getID() + "\"";
     result += ",\"name\":\"" + node.getName() + "\"";
-
-
+    result += ",\"cost\":\"" + node.getCost() + "\"";
+    result += ",\"cost_import\":\"" + node.getCostImport() + "\"";
+    result += ",\"volume\":\"" + node.getVolume() + "\"";
+    result += ",\"volume_import\":\"" + node.getVolumeImport() + "\"";
 
     result += ",\"path\":[";
     Node path = node;
-    while (!path.getID().equals("Gazprom"))
+    while (path != rootNode)
     {
       result += "{\"id\":\"" + path.getID();
       result += "\",\"name\":\"" + path.getName();
@@ -115,38 +113,63 @@ class Tree implements Serializable {
 
     result += ",\"daughters\":[";
     Node dot;
-    for (int i = 0; i < node.getLenChilds(); i++) {
+    for (int i = 0; i < node.getLenChilds() - 1; i++) {
       dot = node.getChild(i);
-      result += "{\"id\":\"" + dot.getID();
-      result += "\",\"name\":\"" + dot.getName();
-      result += "\",\"pr1\":\"p1\",\"pr2\":\"p2\"}";
-      if (i + 1 < node.getLenChilds()) {
-        result += ",";
-      }
+      result += "{";
+      result += "\"id\":\"" + dot.getID() + "\"";
+      result += ",\"name\":\"" + dot.getName() + "\"";
+      result += ",\"cost\":\"" + dot.getCost() + "\"";
+      result += ",\"cost_import\":\"" + dot.getCostImport() + "\"";
+      result += ",\"volume\":\"" + dot.getVolume() + "\"";
+      result += ",\"volume_import\":\"" + dot.getVolumeImport() + "\"";
+      result += "}";
+      result += ",";
     }
-    result += "]";
-
+    if (node.getLenChilds() > 0)
+    {
+      dot = node.getChild(node.getLenChilds() - 1);
+      result += "{";
+      result += "\"id\":\"" + dot.getID() + "\"";
+      result += ",\"name\":\"" + dot.getName() + "\"";
+      result += ",\"cost\":\"" + dot.getCost() + "\"";
+      result += ",\"cost_import\":\"" + dot.getCostImport() + "\"";
+      result += ",\"volume\":\"" + dot.getVolume() + "\"";
+      result += ",\"volume_import\":\"" + dot.getVolumeImport() + "\"";
+      result += "}";
+    }
+    result += "]"; 
 
     result += ",\"projects\":[";
     Project project;
-    for (int i = 0; i < node.getLenProject(); i++) {
+    for (int i = 0; i < node.getLenProject() - 1; i++) {
       project = node.getProject(i);
-      result += "{\"id\":\"" + project.getID();
-      result += "\",\"name\":\"" + project.getName();
-      result += "\",\"descriprion\":\"" + project.getDescriptoin();
-      result += "\",\"stat\":\"" + project.getStatus();
-      result += "\",\"cost\":\"" + project.getCost();
-      result += "\",\"volume\":\"" + project.getVolume();
-      result += "\",\"part\":\"" + project.getPart();
-      result += "\",\"podr\":\"" + project.getDivision();
-      result += "\",\"napr\":\"" + project.getDirection();
-      result += "\"}";
-      if (i + 1 < node.getLenProject()) {
-        result += ",";
-      }
+      result += "{";
+      result += "\"id\":\"" + project.getID() + "\"";
+      result += ",\"name\":\"" + project.getName() + "\"";
+      result += ",\"descriprion\":\"" + project.getDescriptoin() + "\"";
+      result += ",\"status\":\"" + project.getStatus() + "\"";
+      result += ",\"cost\":\"" + project.getCost() + "\"";
+      result += ",\"cost_import\":\"" + project.getCostImport() + "\"";
+      result += ",\"volume\":\"" + project.getVolume() + "\"";
+      result += ",\"volume_import\":\"" + project.getVolumeImport() + "\"";
+      result += "}";
+      result += ",";
+    }
+    if (node.getLenProject() > 0)
+    {
+      project = node.getProject(node.getLenProject() - 1);
+      result += "{";
+      result += "\"id\":\"" + project.getID() + "\"";
+      result += ",\"name\":\"" + project.getName() + "\"";
+      result += ",\"descriprion\":\"" + project.getDescriptoin() + "\"";
+      result += ",\"status\":\"" + project.getStatus() + "\"";
+      result += ",\"cost\":\"" + project.getCost() + "\"";
+      result += ",\"cost_import\":\"" + project.getCostImport() + "\"";
+      result += ",\"volume\":\"" + project.getVolume() + "\"";
+      result += ",\"volume_import\":\"" + project.getVolumeImport() + "\"";
+      result += "}";
     }
     result += "]";
-
 
     result += "}";
     return result;
