@@ -90,10 +90,10 @@ class Tree implements Serializable {
     String result = "{";
     result += "\"id\":\"" + node.getID() + "\"";
     result += ",\"name\":\"" + node.getName() + "\"";
-    result += ",\"cost\":\"" + node.getCost() + "\"";
-    result += ",\"cost_import\":\"" + node.getCostImport() + "\"";
-    result += ",\"volume\":\"" + node.getVolume() + "\"";
-    result += ",\"volume_import\":\"" + node.getVolumeImport() + "\"";
+    result += ",\"cost\":" + node.getCost();
+    result += ",\"cost_import\":" + node.getCostImport();
+    result += ",\"volume\":" + node.getVolume();
+    result += ",\"volume_import\":" + node.getVolumeImport();
 
     result += ",\"path\":[";
     Node path = node;
@@ -118,10 +118,10 @@ class Tree implements Serializable {
       result += "{";
       result += "\"id\":\"" + dot.getID() + "\"";
       result += ",\"name\":\"" + dot.getName() + "\"";
-      result += ",\"cost\":\"" + dot.getCost() + "\"";
-      result += ",\"cost_import\":\"" + dot.getCostImport() + "\"";
-      result += ",\"volume\":\"" + dot.getVolume() + "\"";
-      result += ",\"volume_import\":\"" + dot.getVolumeImport() + "\"";
+      result += ",\"cost\":" + dot.getCost();
+      result += ",\"cost_import\":" + dot.getCostImport();
+      result += ",\"volume\":" + dot.getVolume();
+      result += ",\"volume_import\":" + dot.getVolumeImport();
       result += "}";
       result += ",";
     }
@@ -131,10 +131,10 @@ class Tree implements Serializable {
       result += "{";
       result += "\"id\":\"" + dot.getID() + "\"";
       result += ",\"name\":\"" + dot.getName() + "\"";
-      result += ",\"cost\":\"" + dot.getCost() + "\"";
-      result += ",\"cost_import\":\"" + dot.getCostImport() + "\"";
-      result += ",\"volume\":\"" + dot.getVolume() + "\"";
-      result += ",\"volume_import\":\"" + dot.getVolumeImport() + "\"";
+      result += ",\"cost\":" + dot.getCost();
+      result += ",\"cost_import\":" + dot.getCostImport();
+      result += ",\"volume\":" + dot.getVolume();
+      result += ",\"volume_import\":" + dot.getVolumeImport();
       result += "}";
     }
     result += "]"; 
@@ -148,10 +148,10 @@ class Tree implements Serializable {
       result += ",\"name\":\"" + project.getName() + "\"";
       result += ",\"descriprion\":\"" + project.getDescriptoin() + "\"";
       result += ",\"status\":\"" + project.getStatus() + "\"";
-      result += ",\"cost\":\"" + project.getCost() + "\"";
-      result += ",\"cost_import\":\"" + project.getCostImport() + "\"";
-      result += ",\"volume\":\"" + project.getVolume() + "\"";
-      result += ",\"volume_import\":\"" + project.getVolumeImport() + "\"";
+      result += ",\"cost\":" + project.getCost();
+      result += ",\"cost_import\":" + project.getCostImport();
+      result += ",\"volume\":" + project.getVolume();
+      result += ",\"volume_import\":" + project.getVolumeImport();
       result += "}";
       result += ",";
     }
@@ -163,10 +163,10 @@ class Tree implements Serializable {
       result += ",\"name\":\"" + project.getName() + "\"";
       result += ",\"descriprion\":\"" + project.getDescriptoin() + "\"";
       result += ",\"status\":\"" + project.getStatus() + "\"";
-      result += ",\"cost\":\"" + project.getCost() + "\"";
-      result += ",\"cost_import\":\"" + project.getCostImport() + "\"";
-      result += ",\"volume\":\"" + project.getVolume() + "\"";
-      result += ",\"volume_import\":\"" + project.getVolumeImport() + "\"";
+      result += ",\"cost\":" + project.getCost();
+      result += ",\"cost_import\":" + project.getCostImport();
+      result += ",\"volume\":" + project.getVolume();
+      result += ",\"volume_import\":" + project.getVolumeImport();
       result += "}";
     }
     result += "]";

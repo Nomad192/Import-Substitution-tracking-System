@@ -22,14 +22,14 @@ request.onload = function()
     } 
     else 
     { 
-        console.log("response \"" + request.response + "\"");
-
         try 
         {
             response_information = JSON.parse(request.response);
+            console.log(response_information);            
             try
             {
-                upload_the_main_name(response_information["name"]);   
+                upload_the_main_name(response_information["name"]);
+   
                 //array_sort(response_information["projects"]);
                 //array_sort(response_information["daughters"]);
                 upload_array(response_information["daughters"], "daughters", upload_daughter);
@@ -38,13 +38,12 @@ request.onload = function()
             } 
             catch (err) 
             {
-                console.log(request.response);
                 upload_the_error_name("|Parse error: " + err);
             }            
         }
         catch (err) 
         {
-            console.log(request.response);
+            console.log("response \"" + request.response + "\"");            
             upload_the_error_name("Database " + request.response);
         }
 
@@ -161,12 +160,24 @@ function upload_daughter (element)
     row.appendChild(name); 
        
     let volume_inv = document.createElement("TD");
-    let volume_inv_number = parseInt(element["volume"])/parseInt(element["volume_import"]);
+    let volume_inv_number = (element["volume"])/(element["volume_import"]);
+    if (isNaN(volume_inv_number))
+    {
+        volume_inv_number = 0;
+    }
+    volume_inv_number = Math.floor(volume_inv_number * 100) / 100;
+    element["volume_fraction"] = volume_inv_number;
     volume_inv.appendChild (document.createTextNode(volume_inv_number + "%"));
     row.appendChild(volume_inv);    
 
     let volume_soft = document.createElement("TD");
-    let volume_soft_number = parseInt(element["cost"])/parseInt(element["cost_import"]);
+    let volume_soft_number = (element["cost"])/(element["cost_import"]);
+    if (isNaN(volume_soft_number))
+    {
+        volume_soft_number = 0;
+    }
+    volume_soft_number = Math.floor(volume_soft_number * 100) / 100;
+    element["cost_fraction"] = volume_soft_number;    
     volume_soft.appendChild (document.createTextNode(volume_soft_number + "%"));
     row.appendChild(volume_soft);
 
@@ -196,63 +207,88 @@ function upload_project (element)
 
 sortButtonDaughtersName.onclick = () => 
 {
-    return sortButtonProject("sortButtonDaughtersName", "daughters", upload_daughter);
+    return sortButtonProject("sortButtonDaughtersName", "daughters", upload_daughter, "str");
 }
 
 sortButtonDaughtersVolume.onclick = () => 
 {
-    return sortButtonProject("sortButtonDaughtersVolume", "daughters", upload_daughter);
+    return sortButtonProject("sortButtonDaughtersVolume", "daughters", upload_daughter, "int");
 }
 
 sortButtonDaughtersCost.onclick = () => 
 {
-    return sortButtonProject("sortButtonDaughtersCost", "daughters", upload_daughter);
+    return sortButtonProject("sortButtonDaughtersCost", "daughters", upload_daughter, "int");
 }
 
 sortButtonProjectsStatus.onclick = () =>
 {
-    return sortButtonProject("sortButtonProjectsStatus", "projects", upload_project);
+    return sortButtonProject("sortButtonProjectsStatus", "projects", upload_project, "str");
 }
 
 sortButtonProjectsName.onclick = () =>
 {
-    return sortButtonProject("sortButtonProjectsName", "projects", upload_project);
+    return sortButtonProject("sortButtonProjectsName", "projects", upload_project, "str");
 }
 
 sortButtonProjectsCost.onclick = () =>
 {
-    return sortButtonProject("sortButtonProjectsCost", "projects", upload_project);
+    return sortButtonProject("sortButtonProjectsCost", "projects", upload_project, "int");
 }
 
-function sortButtonProject (id_button, id_array, func)
+let activeSort;
+
+function sortButtonProject (id_button, id_array, func, StrOrInt)
 {
     let array = response_information[id_array];
-    let button = document.getElementById(id_button);
+    let button = document.getElementById(id_button);    
+    if (activeSort == id_button)
+    {
+        button.classList.toggle("invert");        
+    }  
+    else
+    {
+        activeSort = id_button;         
+    }    
+
     let key = button.value;
-    let invert = (button.className.indexOf("invert") != -1) ? 1 : -1;   
+    let invert = (button.className.indexOf("invert") != -1) ? -1 : 1;   
      
-    sort(array, key, invert);
+    sort(array, key, invert, StrOrInt);
 
     let parent = document.getElementById(id_array);
     remove_childs(parent, array.length); 
 
     reupload_array(array, func);  
 
-    button.classList.toggle("invert");    
+
+
 }
 
-function sort (array, key, invert)
+function sort (array, key, invert, StrOrInt)
 {
-    array.sort(function(obj1, obj2) {
-            if (obj1[key].toLowerCase() > obj2[key].toLowerCase()) return invert;        
-            if (obj1[key].toLowerCase() < obj2[key].toLowerCase()) return -invert;
-            if (key != "name")
-            {
-                if (obj1["name"].toLowerCase() > obj2["name"].toLowerCase()) return 1;        
-                if (obj1["name"].toLowerCase() < obj2["name"].toLowerCase()) return -1;    
-            }
+    if (StrOrInt == "int")
+    {
+     array.sort(function(obj1, obj2) {
+            if (obj1[key] > obj2[key]) return invert;        
+            if (obj1[key] < obj2[key]) return -invert;
+            if (obj1["name"].toLowerCase() > obj2["name"].toLowerCase()) return 1;        
+            if (obj1["name"].toLowerCase() < obj2["name"].toLowerCase()) return -1;    
             return 0;
-        });
+        });        
+    } 
+    else
+    {
+        array.sort(function(obj1, obj2) {
+                if (obj1[key].toLowerCase() > obj2[key].toLowerCase()) return invert;        
+                if (obj1[key].toLowerCase() < obj2[key].toLowerCase()) return -invert;
+                if (key != "name")
+                {
+                    if (obj1["name"].toLowerCase() > obj2["name"].toLowerCase()) return 1;        
+                    if (obj1["name"].toLowerCase() < obj2["name"].toLowerCase()) return -1;    
+                }
+                return 0;
+            });        
+    }
 }
 
 function reupload_array (array, func)
