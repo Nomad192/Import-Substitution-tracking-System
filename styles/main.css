@@ -12,6 +12,7 @@ table {
 
 td, th {
     padding: 4px;
+    text-align: left;
 }
 
 .pad
@@ -180,6 +181,8 @@ td, th {
 .table-button
 {
     border: none;
+    text-align: left;
+    padding: 4px;
 }
 
 .absolute-button
