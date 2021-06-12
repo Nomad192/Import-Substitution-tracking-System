@@ -4,10 +4,23 @@ body
     color: #202020;
 }
 
+table {
+    background: #007ac2;
+}
+
+td, th {
+    background: #e5e5e5;
+}
+
 .header
 {
     background: #007ac2;
     color: #f4f4f4;
+    box-shadow: inset 0px -15px 30px -10px #e5e5e5;
+}
+
+.shadow
+{
     box-shadow: inset 0px -15px 30px -10px #e5e5e5;
 }
 

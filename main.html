@@ -63,30 +63,40 @@
           <div class="preloader__image"></div>
         </div>
 
-        <div class="name ">
+        <div class="name">
           <a href="" class="links name-color" id="main-name">
-
           </a>
         </div>
 
-        <div class="blocks-in-a-row">
-          <table class="none" id="daughters" border = "2" width = "100%" height = "70%">
+        <div class="blocks-in-a-row flex">
+          <div class="pad">
+          <table class="none shadow" id="daughters" border = "2" width = "100%">
             <tr>
-              <td colspan = "3" align = "center">
-                <a href="./" class="links name-color">
-                  <div class="ru">
-                    Дочернии компании
-                  </div>
-                  <div class="en">
-                    Subsidiary companies
-                  </div>
-                </a>
+              <td colspan = "3">
+                <div class="blocks-in-a-row between">                  
+                  <a href="./" class="links name-color">
+                    <div class="ru">
+                      <center>Дочернии компании</center>
+                    </div>
+                    <div class="en">
+                      <center>Subsidiary companies</center>
+                    </div>
+                  </a>
+                  <button class="button">
+                    <div class="ru">
+                      Добавить
+                    </div>
+                    <div class="en">
+                      Add
+                    </div>
+                  </button>          
+                </div>
               </td>
             </tr>
-            <tr>
 
-              <td align = "center">
-                <button class="table-button" id="sortButtonDaughtersName" value="name">
+            <tr>
+              <td class="rel">
+                <button class="table-button absolute-button" id="sortButtonDaughtersName" value="name">
                   <div class="ru">
                     Название
                   </div>
@@ -94,10 +104,16 @@
                     Name
                   </div>                
                 </button>
+                <div class="ru">
+                  Название
+                </div>
+                <div class="en">
+                  Name
+                </div>
               </td>
 
-              <td align = "center">
-                <button class="table-button" id="sortButtonDaughtersVolume" value="volume_fraction">
+              <td class="rel">
+                <button class="table-button absolute-button" id="sortButtonDaughtersVolume" value="volume_fraction">
                   <div class="ru">
                     Объём российского ПО
                   </div>
@@ -105,9 +121,16 @@
                     Volume of ru software
                   </div>                
                 </button>
+                <div class="ru">
+                  Объём российского ПО
+                </div>
+                <div class="en">
+                  Volume of ru software
+                </div> 
               </td>
-              <td align = "center">
-                <button class="table-button" id="sortButtonDaughtersCost" value="cost_fraction">
+
+              <td class="rel">
+                <button class="table-button absolute-button" id="sortButtonDaughtersCost" value="cost_fraction">
                   <div class="ru">
                     Объём инвестиций
                   </div>
@@ -115,26 +138,45 @@
                     Investment volume
                   </div>                
                 </button>
+                <div class="ru">
+                  Объём инвестиций
+                </div>
+                <div class="en">
+                  Investment volume
+                </div> 
               </td>
             </tr>
-          </table>
+          </table>  
+          </div>
 
-          <table class="none" id="projects" border = "2" width = "100%" height = "70%">
+          <div class="pad">
+          <table class="none shadow" id="projects" border = "2" width = "100%">
             <tr>
-              <td colspan = "3" align = "center">
-                <a href="./" class="links name-color">
-                  <div class="ru">
-                    Проекты
-                  </div>
-                  <div class="en">
-                    Projects
-                  </div>
-                </a>
+              <td colspan = "3">
+                <div class="blocks-in-a-row between">                  
+                  <a href="./" class="links name-color">
+                    <div class="ru">
+                      <center>Проекты</center>
+                    </div>
+                    <div class="en">
+                      <center>Projects</center>
+                    </div>
+                  </a>
+                  <button class="button">
+                    <div class="ru">
+                      Добавить
+                    </div>
+                    <div class="en">
+                      Add
+                    </div>
+                  </button>
+                </div>
               </td>
             </tr>
+
             <tr>
-              <td align = "center">
-                <button class="table-button" id="sortButtonProjectsStatus" value="status">
+              <td class="rel">
+                <button class="table-button absolute-button" id="sortButtonProjectsStatus" value="status">
                   <div class="ru">
                     Статус
                   </div>
@@ -142,19 +184,35 @@
                     Status
                   </div>
                 </button>
+                <div class="pad">
+                  <div class="ru">
+                    Статус
+                  </div>
+                  <div class="en">
+                    Status
+                  </div>                  
+                </div>
               </td>
-              <td align = "center">
-                <button class="table-button" id="sortButtonProjectsName" value="name">
+
+              <td class="rel">
+                <button class="table-button absolute-button" id="sortButtonProjectsName" value="name">
                   <div class="ru">
                     Название
                   </div>
                   <div class="en">
                     Name
-                  </div>         
+                  </div>      
                 </button>
+                <div class="ru">
+                  Название
+                </div>
+                <div class="en">
+                  Name
+                </div> 
               </td>
-              <td align = "center">
-                <button class="table-button" id="sortButtonProjectsCost" value="cost">
+
+              <td class="rel">
+                <button class="table-button absolute-button" id="sortButtonProjectsCost" value="cost">
                   <div class="ru">
                     Стоимость
                   </div>
@@ -162,23 +220,61 @@
                     Cost
                   </div>
                 </button>
+                <div class="ru">
+                  Стоимость
+                </div>
+                <div class="en">
+                  Cost
+                </div>
               </td>
             </tr>
           </table>
+          </div>
+
 
         </div>
       </div>
 
-      <div class="content-path none" id="path">
-        <div class="ru">
-          Путь
-        </div>
-        <div class="en">
-          Path
-        </div>
-        <br>
+      <div>
+        <div class="content-path">
+          <div class="none" id="path">
+            <div class="ru">
+              Путь
+            </div>
+            <div class="en">
+              Path
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="blocks-in-a-column">
+            <button class="button none" id="daughtersButton">
+              <div class="ru">
+                Добавить дочернюю компанию
+              </div>
+              <div class="en">
+                Add a subsidiary
+              </div>
+            </button>
+            <br> 
+            <button class="button none"  id="projectButton">
+              <div class="ru">
+                Добавить проект
+              </div>
+              <div class="en">
+                Add a project
+              </div>
+            </button> 
+          </div> 
+
+        </div>        
       </div>
+
     </div>
+
+
 
     <script type="text/javascript" src="scripts/change-the-color-theme.js" async></script>
     <script type="text/javascript" src="scripts/change-the-language.js" async></script>    

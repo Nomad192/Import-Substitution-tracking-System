@@ -29,11 +29,8 @@ request.onload = function()
             try
             {
                 upload_the_main_name(response_information["name"]);
-   
-                //array_sort(response_information["projects"]);
-                //array_sort(response_information["daughters"]);
-                upload_array(response_information["daughters"], "daughters", upload_daughter);
-                upload_array(response_information["projects"], "projects", upload_project);
+                upload_array(response_information["daughters"], "daughters", upload_daughter, "daughtersButton");
+                upload_array(response_information["projects"], "projects", upload_project, id="projectButton");
                 upload_path(response_information["path"], "path", upload_path); 
             } 
             catch (err) 
@@ -102,7 +99,7 @@ function upload_the_main_name (name_str) {
     name_class.appendChild(name);
 }
 
-function upload_array (array, id, func)
+function upload_array (array, id, func, id_button)
 {      
     let i = 0;
     for (; i < array.length; i++) 
@@ -112,13 +109,16 @@ function upload_array (array, id, func)
     if (i > 0)
     {
         document.getElementById(id).classList.toggle("none");
+    } 
+    else 
+    {
+        document.getElementById(id_button).classList.toggle("none");
     }
 }
 
 function upload_path (array, id, func)
 {
-    document.getElementById(id).classList.toggle("none"); 
-
+    document.getElementById(id).classList.toggle("none");
     let name_class = document.getElementById("path");
 
     for (let i = array.length-1; i > 0; i--) 
@@ -259,9 +259,6 @@ function sortButtonProject (id_button, id_array, func, StrOrInt)
     remove_childs(parent, array.length); 
 
     reupload_array(array, func);  
-
-
-
 }
 
 function sort (array, key, invert, StrOrInt)

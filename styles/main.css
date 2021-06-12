@@ -6,6 +6,19 @@ body, html
     padding: 0;
 }
 
+table {
+    border-spacing: 3px;
+}
+
+td, th {
+    padding: 4px;
+}
+
+.pad
+{
+   padding: 5px; 
+}
+
 .en .ru,
 .ru .en {
   display: none;
@@ -13,7 +26,7 @@ body, html
 
 .header
 {
-    padding: 5px 5px;
+    padding: 5px;
 }
 
 .header-content
@@ -36,6 +49,7 @@ body, html
     cursor: pointer;
     outline: none;
     border: none;
+    padding: 4px;
 }
 
 .color-button
@@ -86,7 +100,29 @@ body, html
 {
     display: flex;
     flex-direction: row; 
-    justify-content: space-around; 
+    margin: 5px;
+}
+
+.blocks-in-a-column
+{
+    display: flex;
+    flex-direction: column; 
+}
+
+.start
+{
+    justify-content: flex-start;     
+}
+
+.around
+{
+    justify-content: space-around;     
+}
+
+.between
+{
+    justify-content: space-between;
+    align-items: stretch;
 }
 
 .block-shadow
@@ -136,8 +172,27 @@ body, html
     display: none;
 }
 
+.rel
+{
+    position: relative;
+}
+
 .table-button
 {
-    width: 100%;
     border: none;
+}
+
+.absolute-button
+{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;   
+}
+
+.add-button
+{
+    width: 100%;
 }
