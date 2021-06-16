@@ -12,6 +12,22 @@ td, th {
     background: #e5e5e5;
 }
 
+.modal {
+    background: #e5e5e5;
+    color: #202020;
+    box-shadow: 0 0 2px 0 #202020;
+}
+
+.modal-success
+{
+    color: #1db653; 
+}
+
+.modal-error
+{
+    color: #cc0000;
+}
+
 .header
 {
     background: #007ac2;
@@ -40,6 +56,40 @@ td, th {
 .button:active
 {
     box-shadow: inset 0 0 2px 0 silver;
+}
+
+.send-button
+{
+    border: 1px solid #007ac2;
+    background: #e5e5e5;    
+    color: #007ac2;   
+}
+
+.send-button:hover
+{
+    background: #d9ebf9;
+}
+
+.send-button:active
+{
+    box-shadow: inset 0 0 4px 0 #007ac2;
+}
+
+.cancel-button
+{
+    border: 2px solid #e5e5e5;
+    background: #007ac2;    
+    color: #e5e5e5;   
+}
+
+.cancel-button:hover
+{
+    background: #2aa4e4;
+}
+
+.cancel-button:active
+{
+    box-shadow: inset 0 0 2px 0 #1d2225;
 }
 
 .name-color

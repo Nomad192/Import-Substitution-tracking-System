@@ -12,6 +12,22 @@ body.dark td, th {
     background: #202020;
 }
 
+body.dark .modal {
+    background: #202020;
+    color: #d6d6d7;
+    box-shadow: 0 0 2px 0 #d6d6d7;
+}
+
+body.dark .modal-success
+{
+    color: #1db653; 
+}
+
+body.dark .modal-error
+{
+    color: #b00103;
+}
+
 body.dark .header
 {
     background: #373737;
@@ -38,6 +54,40 @@ body.dark .button:hover
 }
 
 body.dark .button:active
+{
+    box-shadow: inset 0 0 2px 0 #1d2225;
+}
+
+body.dark .send-button
+{
+    border: 1px solid #007ac2;
+    background: #202020;    
+    color: #007ac2;   
+}
+
+body.dark .send-button:hover
+{
+    background: #373737;
+}
+
+body.dark .send-button:active
+{
+    box-shadow: inset 0 0 4px 0 #007ac2;
+}
+
+body.dark .cancel-button
+{
+    border: 2px solid #16518b;
+    background: #007ac2;    
+    color: #202020;   
+}
+
+body.dark .cancel-button:hover
+{
+    background: #2aa4e4;
+}
+
+body.dark .cancel-button:active
 {
     box-shadow: inset 0 0 2px 0 #1d2225;
 }

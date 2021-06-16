@@ -4,6 +4,10 @@ if (!localStorage.theme)
     {
         document.body.classList.toggle("dark");
         localStorage.theme = "light";
+    } 
+    else
+    {
+        localStorage.theme = "dark";
     }
 } 
 else
@@ -18,7 +22,7 @@ else
     }
     else
     {
-        alert("PRE ERROR: " + localStorage.theme + " not a valid color theme!");
+        console.log("PRE ERROR: " + localStorage.theme + " not a valid color theme!");
         localStorage.theme = "dark";
     }
 }
@@ -36,7 +40,7 @@ themeButton.onclick = () => {
     }
     else
     {
-        alert("ERROR: " + localStorage.theme + " not a valid color theme!");
+        console.log("ERROR: " + localStorage.theme + " not a valid color theme!");
         const userLang = document.body.className;
         if (userLang.indexOf("dark") !== -1)
         {

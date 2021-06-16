@@ -1,14 +1,10 @@
-let header = document.querySelector('header');
-let section = document.querySelector('section');
-
-let requestURL = "form.php";
 let request = new XMLHttpRequest();
 
 let path = window.location.pathname;
-let page = path.split("/").pop().replace("%20", " ");
-console.log("request \"\"" + page + "\"\"");
+let page = path.split("/").pop();
+console.log("request 3 \"\"" + page + "\"\"");
 
-request.open("GET", "name-form.php?name=\"" + page + "\""); 
+request.open("GET", "requests/name-form.php?name=\"" + page + "\""); 
 
 request.send();    
 
@@ -29,8 +25,9 @@ request.onload = function()
             try
             {
                 upload_the_main_name(response_information["name"]);
+                upload_fractions(response_information);
                 upload_array(response_information["daughters"], "daughters", upload_daughter, "daughtersButton");
-                upload_array(response_information["projects"], "projects", upload_project, id="projectButton");
+                upload_array(response_information["projects"], "projects", upload_project, "projectButton");
                 upload_path(response_information["path"], "path", upload_path); 
             } 
             catch (err) 
@@ -41,7 +38,7 @@ request.onload = function()
         catch (err) 
         {
             console.log("response \"" + request.response + "\"");            
-            upload_the_error_name("Database " + request.response);
+            upload_the_error_name("Database: " + request.response);
         }
 
         
@@ -89,14 +86,56 @@ function upload_the_error_name (name_str)
     name_class.appendChild(name);
 }
 
-function upload_the_main_name (name_str) {
+function upload_the_main_name (name_str) 
+{
     let name = document.createTextNode(name_str);
     let name_class = document.getElementById('main-name');
+    
     while (name_class.firstChild) 
     {
         name_class.removeChild(name_class.firstChild);
     }
-    name_class.appendChild(name);
+
+    let name_link = document.createElement("a");
+    name_link.appendChild(name);
+    name_link.href = ""; 
+    name_link.className = "links name-color";
+    name_class.appendChild(name_link);   
+}
+
+function upload_fractions(element) 
+{
+    let name_class = document.getElementById('main-name');
+
+    let volume_imp_number = (element["volume_import"])/(element["volume"]);
+    if (isNaN(volume_imp_number))
+    {
+        name_class.appendChild (document.createTextNode("\u00A0NaN"));
+    }
+    else if (volume_imp_number > 0.01)
+    {
+        volume_imp_number = Math.round(volume_imp_number * 100) / 100;
+        name_class.appendChild (document.createTextNode("\u00A0" + volume_imp_number + "%"));  
+    }
+    else
+    {
+        name_class.appendChild (document.createTextNode("\u00A0<0.01%"));      
+    }
+
+    let volume_soft_number = (element["cost_import"])/(element["cost"]);
+    if (isNaN(volume_soft_number))
+    {
+        name_class.appendChild (document.createTextNode(" NaN"));
+    }
+    else if (volume_soft_number > 0.01)
+    {
+        volume_soft_number = Math.round(volume_soft_number * 100) / 100;
+        name_class.appendChild (document.createTextNode(" " + volume_soft_number + "%"));  
+    }
+    else
+    {
+        name_class.appendChild (document.createTextNode(" <0.01%"));      
+    }
 }
 
 function upload_array (array, id, func, id_button)
@@ -159,26 +198,44 @@ function upload_daughter (element)
     name.appendChild(name_link);
     row.appendChild(name); 
        
-    let volume_inv = document.createElement("TD");
-    let volume_inv_number = (element["volume"])/(element["volume_import"]);
-    if (isNaN(volume_inv_number))
+    let volume_imp = document.createElement("TD");
+    let volume_imp_number = (element["volume_import"])/(element["volume"]);
+    if (isNaN(volume_imp_number))
     {
-        volume_inv_number = 0;
+        volume_imp_number = 0;
+        volume_imp.appendChild (document.createTextNode("NaN"));
     }
-    volume_inv_number = Math.floor(volume_inv_number * 100) / 100;
-    element["volume_fraction"] = volume_inv_number;
-    volume_inv.appendChild (document.createTextNode(volume_inv_number + "%"));
-    row.appendChild(volume_inv);    
+    else if (volume_imp_number > 0.01)
+    {
+        volume_imp_number = Math.round(volume_imp_number * 100) / 100;
+        volume_imp.appendChild (document.createTextNode(volume_imp_number + "%")); 
+    }
+    else
+    {
+        volume_imp_number = 0;
+        volume_imp.appendChild (document.createTextNode("<0.01%"));      
+    }
+    element["volume_fraction"] = volume_imp_number;
+    row.appendChild(volume_imp);    
 
     let volume_soft = document.createElement("TD");
-    let volume_soft_number = (element["cost"])/(element["cost_import"]);
+    let volume_soft_number = (element["cost_import"])/(element["cost"]);
     if (isNaN(volume_soft_number))
     {
         volume_soft_number = 0;
+        volume_soft.appendChild (document.createTextNode("NaN"));
     }
-    volume_soft_number = Math.floor(volume_soft_number * 100) / 100;
+    else if (volume_soft_number > 0.01)
+    {
+        volume_soft_number = Math.round(volume_soft_number * 100) / 100;
+        volume_soft.appendChild (document.createTextNode(volume_soft_number + "%")); 
+    }
+    else
+    {
+        volume_soft_number = 0;
+        volume_soft.appendChild (document.createTextNode("<0.01%"));      
+    }
     element["cost_fraction"] = volume_soft_number;    
-    volume_soft.appendChild (document.createTextNode(volume_soft_number + "%"));
     row.appendChild(volume_soft);
 
     let name_class = document.getElementById("daughters");

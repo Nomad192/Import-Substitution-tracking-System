@@ -12,272 +12,416 @@
 
   <body class = "dark en">
 
-    <header class="header">
-
-      <div class="header-content">
-
-        <div class="ru">
-          Система Слежения за Проектами
-        </div>
-        <div class="en">
-          Project Tracking System
-        </div>
-        <div class="header-buttons">
-          <button class="map-button button" id="mapButton">
-            <div class="ru">
-              Карта
-            </div>
-            <div class="en">
-              Map
-            </div>
-          </button>
-
-          <button class="lang-button button" id="langButton">
-            <div class="ru">
-              Сменить язык
-            </div>
-            <div class="en">
-              Change the language
-            </div>
-          </button>
-
-          <button class="color-button button" id="themeButton">
-            <div class="ru">
-              Сменить тему
-            </div>
-            <div class="en">
-              Сhange the color theme
-            </div>
-          </button>          
-        </div>
-
-
+    <div id="all-content">
+      <div id="block" class="block none">
       </div>
 
-    </header>
-
-    <div class="content">
-      <div class="content-main">      
-
-        <div class="preloader">
-          <div class="preloader__image"></div>
-        </div>
-
-        <div class="name">
-          <a href="" class="links name-color" id="main-name">
-          </a>
-        </div>
-
-        <div class="blocks-in-a-row flex">
-          <div class="pad">
-          <table class="none shadow"; id="daughters" border = "2" width = "100%">
-            <tr>
-              <td colspan = "3">
-                <div class="blocks-in-a-row between">                  
-                  <a href="./" class="links name-color">
-                    <div class="ru">
-                      <center>Дочернии компании</center>
-                    </div>
-                    <div class="en">
-                      <center>Subsidiary companies</center>
-                    </div>
-                  </a>
-                  <button class="button">
-                    <div class="ru">
-                      Добавить
-                    </div>
-                    <div class="en">
-                      Add
-                    </div>
-                  </button>          
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="rel">
-                <button class="table-button absolute-button" id="sortButtonDaughtersName" value="name">
-                  <div class="ru">
-                    Название
-                  </div>
-                  <div class="en">
-                    Name
-                  </div>                
-                </button>
-                <div class="ru">
-                  Название
-                </div>
-                <div class="en">
-                  Name
-                </div>
-              </td>
-
-              <td class="rel">
-                <button class="table-button absolute-button" id="sortButtonDaughtersVolume" value="volume_fraction">
-                  <div class="ru">
-                    Объём российского ПО
-                  </div>
-                  <div class="en">
-                    Volume of ru software
-                  </div>                
-                </button>
-                <div class="ru">
-                  Объём российского ПО
-                </div>
-                <div class="en">
-                  Volume of ru software
-                </div> 
-              </td>
-
-              <td class="rel">
-                <button class="table-button absolute-button" id="sortButtonDaughtersCost" value="cost_fraction">
-                  <div class="ru">
-                    Объём инвестиций
-                  </div>
-                  <div class="en">
-                    Investment volume
-                  </div>                
-                </button>
-                <div class="ru">
-                  Объём инвестиций
-                </div>
-                <div class="en">
-                  Investment volume
-                </div> 
-              </td>
-            </tr>
-          </table>  
+      <header class="header">
+        <div class="header-content">
+          <div class="ru">
+            Система Слежения за Проектами
           </div>
-
-          <div class="pad">
-          <table class="none shadow" id="projects" border = "2" width = "100%">
-            <tr>
-              <td colspan = "3">
-                <div class="blocks-in-a-row between">                  
-                  <a href="./" class="links name-color">
-                    <div class="ru">
-                      <center>Проекты</center>
-                    </div>
-                    <div class="en">
-                      <center>Projects</center>
-                    </div>
-                  </a>
-                  <button class="button">
-                    <div class="ru">
-                      Добавить
-                    </div>
-                    <div class="en">
-                      Add
-                    </div>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="rel">
-                <button class="table-button absolute-button" id="sortButtonProjectsStatus" value="status">
-                  <div class="ru">
-                    Статус
-                  </div>
-                  <div class="en">
-                    Status
-                  </div>
-                </button>
-                <div class="pad">
-                  <div class="ru">
-                    Статус
-                  </div>
-                  <div class="en">
-                    Status
-                  </div>                  
-                </div>
-              </td>
-
-              <td class="rel">
-                <button class="table-button absolute-button" id="sortButtonProjectsName" value="name">
-                  <div class="ru">
-                    Название
-                  </div>
-                  <div class="en">
-                    Name
-                  </div>      
-                </button>
-                <div class="ru">
-                  Название
-                </div>
-                <div class="en">
-                  Name
-                </div> 
-              </td>
-
-              <td class="rel">
-                <button class="table-button absolute-button" id="sortButtonProjectsCost" value="cost">
-                  <div class="ru">
-                    Стоимость
-                  </div>
-                  <div class="en">
-                    Cost
-                  </div>
-                </button>
-                <div class="ru">
-                  Стоимость
-                </div>
-                <div class="en">
-                  Cost
-                </div>
-              </td>
-            </tr>
-          </table>
+          <div class="en">
+            Project Tracking System
           </div>
-
-
-        </div>
-      </div>
-
-      <div>
-        <div class="content-path">
-          <div class="none" id="path">
-            <div class="ru">
-              Путь
-            </div>
-            <div class="en">
-              Path
-            </div>
-          </div>
-
-          <br>
-          <br>
-
-          <div class="blocks-in-a-column">
-            <button class="button none" id="daughtersButton">
+          <div class="header-buttons">
+            <button class="map-button button" id="mapButton">
               <div class="ru">
-                Добавить дочернюю компанию
+                Карта
               </div>
               <div class="en">
-                Add a subsidiary
+                Map
               </div>
             </button>
-            <br> 
-            <button class="button none"  id="projectButton">
+
+            <button class="lang-button button" id="langButton">
               <div class="ru">
-                Добавить проект
+                Сменить язык
               </div>
               <div class="en">
-                Add a project
+                Change the language
               </div>
-            </button> 
-          </div> 
+            </button>
 
-        </div>        
-      </div>
+            <button class="color-button button" id="themeButton">
+              <div class="ru">
+                Сменить тему
+              </div>
+              <div class="en">
+                Сhange the color theme
+              </div>
+            </button>          
+          </div>
+        </div>
+      </header>
 
+      <div class="content">
+        <div class="content-main">      
+
+          <div class="preloader">
+            <div class="preloader__image"></div>
+          </div>
+
+          <div class="name name-color"  id="main-name">
+          </div>
+
+          <div id="add-daughter" class="pad none">
+            <div class="pad">
+              <table border = "2">
+                <tr>
+                  <td>
+                    <div class="blocks-in-a-row between"> 
+                      <div class="ru">
+                        Название компании:&nbsp&nbsp&nbsp
+                      </div>
+                      <div class="en">
+                        Company Name:&nbsp&nbsp&nbsp
+                      </div>
+                      <input required type = "text" id="form-name" maxlength="100" size = "25" name = "name" pattern = "^[а-яА-ЯёЁa-zA-Z\s0-9]+$" placeholder = "Газпром">    
+                    </div>
+                  </td>
+                  <td class="rel" rowspan = "2">
+                    <button id="addButtonDaughter" class="absolute-button">
+                      <div class="ru">
+                        Добавить
+                      </div>
+                      <div class="en">
+                        Add
+                      </div> 
+                    </button>
+                    <div class="ru">
+                      Добавить&nbsp&nbsp&nbsp
+                    </div>
+                    <div class="en">
+                      Add&nbsp&nbsp&nbsp
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="blocks-in-a-row between">
+                      <div class="ru">
+                        Id компании (Только a-Z0-9_):&nbsp&nbsp&nbsp
+                      </div>
+                      <div class="en">
+                        Company ID (Only a-Z0-9_):&nbsp&nbsp&nbsp
+                      </div> 
+                      <input required type = "text" id="form-id" maxlength="100" size = "25" name = "id" pattern = "^[a-zA-Z_0-9]+$" placeholder = "Gazprom">    
+                    </div>
+                  </td>
+                </tr>  
+                <tr>
+                  <td colspan = "2">
+                    <div id="standard-add-text">
+                    <div class="ru">
+                      Id будет отображаться в адресной строке и не может повторяться для разных компаний
+                    </div>
+                    <div class="en">
+                      The ID will be displayed in the address bar and cannot be repeated for different companies
+                    </div> 
+                    </div>
+                    <div id="error-add-text" class="modal-error none">
+                      <div class="ru">
+                        Id занят!
+                      </div>
+                      <div class="en">
+                        Id is busy!
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="blocks-in-a-row margin">
+            <div class="pad">
+              <table class="none shadow"; id="daughters" border = "2" width = "100%">
+                <tr>
+                  <td colspan = "3">
+                    <div class="blocks-in-a-row between">                  
+                      <a href="./" class="links name-color">
+                        <div class="ru">
+                          <center>Дочернии компании</center>
+                        </div>
+                        <div class="en">
+                          <center>Subsidiary companies</center>
+                        </div>
+                      </a>
+                      <button id="openWindowAddDaughter" class="button">
+                        <div class="ru">
+                          Добавить
+                        </div>
+                        <div class="en">
+                          Add
+                        </div>
+                      </button>          
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="rel">
+                    <button class="table-button absolute-button" id="sortButtonDaughtersName" value="name">
+                      <div class="ru">
+                        Название
+                      </div>
+                      <div class="en">
+                        Name
+                      </div>                
+                    </button>
+                    <div class="ru">
+                      Название
+                    </div>
+                    <div class="en">
+                      Name
+                    </div>
+                  </td>
+
+                  <td class="rel">
+                    <button class="table-button absolute-button" id="sortButtonDaughtersVolume" value="volume_fraction">
+                      <div class="ru">
+                        Объём российского ПО
+                      </div>
+                      <div class="en">
+                        Volume of ru software
+                      </div>                
+                    </button>
+                    <div class="ru">
+                      Объём российского ПО
+                    </div>
+                    <div class="en">
+                      Volume of ru software
+                    </div> 
+                  </td>
+
+                  <td class="rel">
+                    <button class="table-button absolute-button" id="sortButtonDaughtersCost" value="cost_fraction">
+                      <div class="ru">
+                        Объём инвестиций
+                      </div>
+                      <div class="en">
+                        Investment volume
+                      </div>                
+                    </button>
+                    <div class="ru">
+                      Объём инвестиций
+                    </div>
+                    <div class="en">
+                      Investment volume
+                    </div> 
+                  </td>
+                </tr>
+              </table>  
+            </div>
+
+            <div class="pad">
+              <table class="none shadow" id="projects" border = "2" width = "100%">
+                <tr>
+                  <td colspan = "3">
+                    <div class="blocks-in-a-row between">                  
+                      <a href="./" class="links name-color">
+                        <div class="ru">
+                          <center>Проекты</center>
+                        </div>
+                        <div class="en">
+                          <center>Projects</center>
+                        </div>
+                      </a>
+                      <button class="button">
+                        <div class="ru">
+                          Добавить
+                        </div>
+                        <div class="en">
+                          Add
+                        </div>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="rel">
+                    <button class="table-button absolute-button" id="sortButtonProjectsStatus" value="status">
+                      <div class="ru">
+                        Статус
+                      </div>
+                      <div class="en">
+                        Status
+                      </div>
+                    </button>
+                    <div class="pad">
+                      <div class="ru">
+                        Статус
+                      </div>
+                      <div class="en">
+                        Status
+                      </div>                  
+                    </div>
+                  </td>
+
+                  <td class="rel">
+                    <button class="table-button absolute-button" id="sortButtonProjectsName" value="name">
+                      <div class="ru">
+                        Название
+                      </div>
+                      <div class="en">
+                        Name
+                      </div>      
+                    </button>
+                    <div class="ru">
+                      Название
+                    </div>
+                    <div class="en">
+                      Name
+                    </div> 
+                  </td>
+
+                  <td class="rel">
+                    <button class="table-button absolute-button" id="sortButtonProjectsCost" value="cost">
+                      <div class="ru">
+                        Стоимость
+                      </div>
+                      <div class="en">
+                        Cost
+                      </div>
+                    </button>
+                    <div class="ru">
+                      Стоимость
+                    </div>
+                    <div class="en">
+                      Cost
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="content-path pad">
+            <div class="none" id="path">
+              <div class="ru">
+                Путь
+              </div>
+              <div class="en">
+                Path
+              </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="blocks-in-a-column">
+              <button class="button none" id="daughtersButton">
+                <div id="openPathWindowAddDaughter" class="ru">
+                  Добавить дочернюю компанию
+                </div>
+                <div class="en">
+                  Add a subsidiary
+                </div>
+              </button>
+              <br> 
+              <button class="button none"  id="projectButton">
+                <div class="ru">
+                  Добавить проект
+                </div>
+                <div class="en">
+                  Add a project
+                </div>
+              </button> 
+            </div>
+          </div>        
+        </div>
+
+      </div>  
     </div>
+    
+    <div class="modal-plus">
+      <div id="modal" class="modal none">
+        <div class="modal-content">
+          <div class="ru">
+            Проверьте все данные
+          </div>
+          <div class="en">
+            Check all the data
+          </div>
+          <br>
+          <div id="modal-name">           
+          </div>
+          <div id="modal-id">
+          </div>
+          <br>
+          <div class="status-and-modal-buttons">
+            <div id="modal-status" class="modal-status">
+              <div id="modal-success" class="modal-success none">
+                <div class="ru">
+                  Успешно
+                </div>
+                <div class="en">
+                  Success
+                </div>
+              </div>
+              <div id="modal-error" class="modal-error none">
+                <div class="ru">
+                  Ошибка
+                </div>
+                <div class="en">
+                  Error
+                </div>
+              </div>
+            </div>
+            <div class="modal-buttons">
+              <div class="pad">
+                <button id="sendButton" class="small-button send-button">
+                  <div class="ru">
+                    Добавить
+                  </div>
+                  <div class="en">
+                    Add
+                  </div>  
+                </button>
+              </div>
+              <div class="pad">
+                <button id="cancelButton" class="small-button cancel-button">
+                  <div class="ru">
+                    Отмена
+                  </div>
+                  <div class="en">
+                    Cancel
+                  </div>
+                </button>    
+              </div>             
+            </div>            
+          </div>
+        </div>
+      </div> 
+    </div>   
 
-
+    <div id="modal-block" class="block none">
+    </div>  
 
     <script type="text/javascript" src="scripts/change-the-color-theme.js" async></script>
     <script type="text/javascript" src="scripts/change-the-language.js" async></script>    
-    <script type="text/javascript" src="scripts/request-for-basic-information.js"></script>  
+    <script type="text/javascript" src="scripts/request-for-basic-information.js"></script> 
+    <script type="text/javascript" src="scripts/request-for-add-daughter.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function()
+      {
+        var name = document.getElementById("form-name");
+        name.addEventListener("input", function (evt)
+        {
+          evt.target.value = evt.target.value.replace(/[^а-яА-ЯёЁa-zA-Z\s0-9]/, "");
+        });        
+        var id = document.getElementById("form-id");
+        id.addEventListener("input", function (evt)
+        {
+          evt.target.value = evt.target.value.replace(/[^a-zA-Z_0-9]/, "");
+        });
+      });
+    </script>
+
   </body>
 </html>

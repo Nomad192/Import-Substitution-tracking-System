@@ -15,7 +15,7 @@ if (!localStorage.language)
     }
     else
     {
-        alert("ERROR: " + localStorage.language + " not a valid language!");
+        console.log("ERROR: " + localStorage.language + " not a valid language!");
         localStorage.language = "en";
     }
 } 
@@ -32,7 +32,7 @@ else
     }
     else
     {
-        alert("ERROR: " + localStorage.language + " not a valid language!");
+        console.log("ERROR: " + localStorage.language + " not a valid language!");
         localStorage.language = "en";
     }
 }
@@ -61,7 +61,7 @@ langButton.onclick = () => {
     }
     else
     {
-        alert("ERROR: " + localStorage.language + " not a valid language!");
+        console.log("ERROR: " + localStorage.language + " not a valid language!");
         const userLang = document.body.className;
         if (userLang.indexOf("en") !== -1)
         {
