@@ -4,7 +4,7 @@ Tracking system for import substitution of foreign software in Gazprom.
 Developed as part of the "Digital OilHack" hackathon.
 The project includes a website written using the following technologies: html, css, javascript, php, as well as a database written in java.
 
-==========================================================================================
+===========================================================================
 
 # Система отслеживания импортозамещения
 
